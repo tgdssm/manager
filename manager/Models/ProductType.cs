@@ -12,5 +12,7 @@ namespace manager.Models
         [Required]
         [Column(TypeName = "varchar(75)")]
         public string Name { get; set; }
+
+        public List<Product> Products { get; set; }
     }
 }

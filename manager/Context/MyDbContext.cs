@@ -11,5 +11,9 @@ namespace manager.Context
         }
 
         public DbSet<ProductType> ProductType { get; set; }
+        public DbSet<ProductSize> ProductSize { get; set; }
+        public DbSet<Product> Product { get; set; }
+
+
     }
 }

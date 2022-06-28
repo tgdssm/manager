@@ -10,6 +10,10 @@ builder.Services.AddDbContext<MyDbContext>(options => options.UseMySql(
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<ProductTypeService>();
+builder.Services.AddScoped<ProductSizeService>();
+builder.Services.AddScoped<ProductService>();
+
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
