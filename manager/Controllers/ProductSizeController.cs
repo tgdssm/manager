@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using manager.Models;
 using manager.Services;
+using manager.Dtos;
 
 namespace manager.Controllers
 {
@@ -16,7 +17,7 @@ namespace manager.Controllers
         }
 
         [HttpGet]
-        public ActionResult<ProductSize> GetProductSizes()
+        public ActionResult<List<ProductSizeDto>> GetProductSizes()
         {
             var productSizes = _service.Get();
 
@@ -24,7 +25,7 @@ namespace manager.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ProductSize> GetProductSize(int id)
+        public ActionResult<ProductSizeDto> GetProductSize(int id)
         {
             try
             {
@@ -38,7 +39,7 @@ namespace manager.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutProductSize(int id, ProductSize editedSize)
+        public ActionResult<ProductSizeDto> PutProductSize(int id, ProductSizeCreateUpdateDto editedSize)
         {
             try
             {
@@ -52,10 +53,10 @@ namespace manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ProductSize> PostProductSize([FromBody] ProductSize newProductSize)
+        public ActionResult<ProductSizeDto> PostProductSize([FromBody] ProductSizeCreateUpdateDto newProductSize)
         {
             var productSize = _service.Create(newProductSize);
-            return CreatedAtAction("GetProductType", new { id = productSize.Id }, productSize);
+            return CreatedAtAction(nameof(GetProductSize), new { id = productSize.Id }, productSize);
         }
 
         [HttpDelete("{id}")]

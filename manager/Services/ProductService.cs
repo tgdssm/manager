@@ -1,6 +1,9 @@
 ﻿using manager.Context;
+using manager.Dtos;
 using manager.Models;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace manager.Services
 {
@@ -12,47 +15,54 @@ namespace manager.Services
             _context = context;
         }
 
-        public Product Create(Product product)
+        public ProductDto Create(ProductCreateUpdateDto newProduct)
         {
 
-
+            var product = newProduct.Adapt<Product>();
             _context.Product.Add(product);
 
             _context.SaveChanges();
 
-            return product;
+            return product.Adapt<ProductDto>();
         }
 
-        public List<Product> Get()
+        public List<ProductDto> Get()
         {
-            return _context.Product.ToList();
+            return _context.Product.AsNoTracking()
+                .Include(product => product.ProductType)
+                .Include(product => product.ProductSizes)
+                .ProjectToType<ProductDto>()
+                .ToList();
         }
 
-        public Product GetById(int id)
+        public ProductDto GetById(int id)
+        {
+            var product = _context.Product.AsNoTracking()
+                .Include(product => product.ProductType)
+                .Include(product => product.ProductSizes)
+                .SingleOrDefault(product => product.Id == id);
+
+            if (product is null)
+                throw new Exception("Not found");
+
+            return product.Adapt<ProductDto>();
+
+        }
+
+        public ProductDto Put(int id, ProductCreateUpdateDto editedProduct)
         {
             var product = _context.Product.SingleOrDefault(product => product.Id == id);
 
             if (product is null)
                 throw new Exception("Not found");
 
-            return product;
 
-        }
 
-        public Product Put(int id, Product editedProduct)
-        {
-            var product = _context.Product.SingleOrDefault(product => product.Id == id);
-
-            if (product is null)
-                throw new Exception("Not found");
-
-            //copio as atualizações
-            product.Price = product.Price;
-            product.Details = product.Details;
+            editedProduct.Adapt(product);
 
             _context.SaveChanges();
 
-            return product;
+            return product.Adapt<ProductDto>();
         }
 
         public void Delete(int id)

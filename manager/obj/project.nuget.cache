@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "vSVuuwdY4DlfWOPSfjL/4cQZNJz6WgDvwnq+QvdStulhDz9s4EpBuComaAozYNz2Lkv6cDzVvCOZbKnPrcNlfw==",
+  "dgSpecHash": "rm5VnwxSXtcgI+DGgfPNCkD/dzxuxJ6IbVdYnIn0UroTS2eq1xBuvKVU4/zLMHYT6un9oDpp361pDMnVBzZjmQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\thali\\source\\repos\\manager\\manager\\manager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thali\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\thali\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
+    "C:\\Users\\thali\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",
     "C:\\Users\\thali\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\thali\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\thali\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",

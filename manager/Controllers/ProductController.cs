@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using manager.Models;
 using manager.Services;
+using manager.Dtos;
 
 namespace manager.Controllers
 {
@@ -17,7 +18,7 @@ namespace manager.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public ActionResult<Product> GetProducts()
+        public ActionResult<ProductDto> GetProducts()
         {
             var product = _service.Get();
 
@@ -26,7 +27,7 @@ namespace manager.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public ActionResult<Product> GetProduct(int id)
+        public ActionResult<ProductDto> GetProduct(int id)
         {
             try
             {
@@ -41,7 +42,7 @@ namespace manager.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public ActionResult PutProduct(int id, Product editedProduct)
+        public ActionResult<ProductDto> PutProduct(int id, ProductCreateUpdateDto editedProduct)
         {
             try
             {
@@ -56,10 +57,10 @@ namespace manager.Controllers
 
         // POST: api/Products
         [HttpPost]
-        public ActionResult<Product> PostProduct([FromBody] Product newProduct)
+        public ActionResult<ProductDto> PostProduct([FromBody] ProductCreateUpdateDto newProduct)
         {
             var product = _service.Create(newProduct);
-            return CreatedAtAction("GetProductType", new { id = product.Id }, product);
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
         // DELETE: api/Products/5

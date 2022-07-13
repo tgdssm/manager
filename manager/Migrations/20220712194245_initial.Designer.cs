@@ -10,8 +10,8 @@ using manager.Context;
 namespace manager.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220628012212_Initial")]
-    partial class Initial
+    [Migration("20220712194245_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,9 +47,6 @@ namespace manager.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProduct")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")

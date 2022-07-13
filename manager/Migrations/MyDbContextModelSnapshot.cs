@@ -47,9 +47,6 @@ namespace manager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProduct")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 

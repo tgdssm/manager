@@ -1,6 +1,9 @@
 ﻿using manager.Context;
+using manager.Dtos;
 using manager.Models;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace manager.Services
 {
@@ -12,46 +15,53 @@ namespace manager.Services
             _context = context;
         }
 
-        public ProductSize Create(ProductSize productSize)
+        public ProductSizeDto Create(ProductSizeCreateUpdateDto newProductSize)
         {
-
+            var productSize = newProductSize.Adapt<ProductSize>();
 
             _context.ProductSize.Add(productSize);
 
             _context.SaveChanges();
 
-            return productSize;
+            return productSize.Adapt<ProductSizeDto>();
         }
 
-        public List<ProductSize> Get()
+        public List<ProductSizeDto> Get()
         {
-            return _context.ProductSize.ToList();
+            return _context.ProductSize.AsNoTracking()
+                .Include(productSize => productSize.Product)
+                .ProjectToType<ProductSizeDto>()
+                .ToList();
         }
 
-        public ProductSize GetById(int id)
+        public ProductSizeDto GetById(int id)
         {
-            var productSize = _context.ProductSize.SingleOrDefault(productSize => productSize.Id == id);
+            var productSize = _context.ProductSize
+                .AsNoTracking()
+                .Include(productSize => productSize.Product)
+                .ProjectToType<ProductSizeDto>()
+                .SingleOrDefault(productSize => productSize.Id == id);
 
             if (productSize is null)
                 throw new Exception("Not found");
 
-            return productSize;
+            return productSize.Adapt<ProductSizeDto>();
 
         }
 
-        public ProductSize Put(int id, ProductSize editedSize)
+        public ProductSizeDto Put(int id, ProductSizeCreateUpdateDto editedSize)
         {
-            var productSize = _context.ProductSize.SingleOrDefault(productSize => productSize.Id == id);
+            var productSize = _context.ProductSize
+                .SingleOrDefault(productSize => productSize.Id == id);
 
             if (productSize is null)
                 throw new Exception("Not found");
 
             //copio as atualizações
-            productSize.Size = editedSize.Size;
-
+            editedSize.Adapt(productSize);
             _context.SaveChanges();
 
-            return productSize;
+            return productSize.Adapt<ProductSizeDto>();
         }
 
         public void Delete(int id)

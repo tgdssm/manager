@@ -263,3 +263,5 @@ C:\Users\thali\source\repos\manager\manager\obj\Debug\net6.0\manager.genruntimec
 C:\Users\thali\source\repos\manager\manager\obj\Debug\net6.0\ref\manager.dll
 C:\Users\thali\source\repos\manager\manager\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\thali\source\repos\manager\manager\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\thali\source\repos\manager\manager\bin\Debug\net6.0\Mapster.dll
+C:\Users\thali\source\repos\manager\manager\bin\Debug\net6.0\Mapster.Core.dll
